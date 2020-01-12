@@ -4,6 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="hellotest">this is a test of spring mvc controller</a>
+    <a href="hellotest">this is a test of spring mvc controller</a><br>
+    <a href="testsql">this is a test of sql query</a>
 </body>
 </html>

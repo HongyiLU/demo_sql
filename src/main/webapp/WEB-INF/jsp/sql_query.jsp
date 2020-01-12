@@ -8,9 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>TestSqlQuery</title>
 </head>
 <body>
+<form action="testsql" method="post">
+    Sql Query:<br>
+    <input type="text" name="sqlquery">
+
+    <input type="submit" value="submit" /><br />
+</form>
 
 </body>
 </html>
