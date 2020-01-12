@@ -27,24 +27,30 @@ public class SqlTestController {
         return "success";
     }
 
+    @RequestMapping(path = "/sqlquery")
+    public String testSql() throws IOException {
+
+//        InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
+//        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+//        SqlSessionFactory factory = builder.build(in);
+//        SqlSession session = factory.openSession();
+//        EmpDao empDao = session.getMapper(EmpDao.class);
+//
+//        List<Emp> emps = empDao.findAll();
+//
+//        for(Emp emp:emps){
+//            System.out.println(emp.toString());
+//        }
+//
+//        session.close();
+//        in.close();
+        return "sql_query";
+    }
+
     @RequestMapping(path = "/testsql")
-    public String testSql(String sqlquery) throws IOException {
+    public String getSqlQuery(String sqlquery){
         System.out.println(sqlquery);
         this.sqlquery=sqlquery;
-        InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
-        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory factory = builder.build(in);
-        SqlSession session = factory.openSession();
-        EmpDao empDao = session.getMapper(EmpDao.class);
-
-        List<Emp> emps = empDao.findAll();
-
-        for(Emp emp:emps){
-            System.out.println(emp.toString());
-        }
-
-        session.close();
-        in.close();
-        return "sql_query";
+        return "success";
     }
 }
