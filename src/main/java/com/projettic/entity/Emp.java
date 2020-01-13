@@ -3,10 +3,10 @@ package com.projettic.entity;
 import java.io.Serializable;
 
 public class Emp implements Serializable {
-    int id_emp;
+    Integer id_emp;
     String nom_emp;
 
-    public int getId_emp() {
+    public Integer getId_emp() {
         return id_emp;
     }
 

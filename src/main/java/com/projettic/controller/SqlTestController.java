@@ -2,10 +2,6 @@ package com.projettic.controller;
 
 import com.projettic.dao.EmpDao;
 import com.projettic.entity.Emp;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,12 +11,6 @@ import java.util.List;
 
 @Controller
 public class SqlTestController {
-
-
-    private String sqlquery;
-    public String getSqlquery() {
-        return sqlquery;
-    }
     @RequestMapping(path = "/hellotest" )
     public String helloTest(){
         System.out.println("Hello Spring MVC");
@@ -29,28 +19,8 @@ public class SqlTestController {
 
     @RequestMapping(path = "/sqlquery")
     public String testSql() throws IOException {
-
-//        InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
-//        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-//        SqlSessionFactory factory = builder.build(in);
-//        SqlSession session = factory.openSession();
-//        EmpDao empDao = session.getMapper(EmpDao.class);
-//
-//        List<Emp> emps = empDao.findAll();
-//
-//        for(Emp emp:emps){
-//            System.out.println(emp.toString());
-//        }
-//
-//        session.close();
-//        in.close();
         return "sql_query";
     }
 
-    @RequestMapping(path = "/testsql")
-    public String getSqlQuery(String sqlquery){
-        System.out.println(sqlquery);
-        this.sqlquery=sqlquery;
-        return "success";
-    }
+
 }

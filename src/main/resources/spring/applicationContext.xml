@@ -8,24 +8,62 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.projettic"/>
 
 
-
-    <context:component-scan base-package="com.projettic.controller"/>
-
-
-
-
-
+<!--    SpringMVC configuration-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-
-
+    <mvc:resources mapping="/css/" location="WEB-INF/static/css/**" />
+    <mvc:resources mapping="/images/" location="WEB-INF/static/images/**" />
+    <mvc:resources mapping="/js/" location="WEB-INF/static/js/**" />
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+
+<!--    SpringJDBC configuration-->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/testtic?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean name="jdbcTemelate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean name="tranManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 配置事务拦截器 -->
+    <bean name="tranInterceptor" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="tranManager"></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+        <property name="target" ref="service"></property>
+    </bean>
+
+
+    <!-- 配置dao层 -->
+    <bean name="jdbcDao" class="com.projettic.dao.impl.EmpDaoImpl">
+        <property name="jdbcTemplateObject" ref="jdbcTemelate"></property>
+    </bean>
+
+    <bean name="service" class="com.projettic.service.impl.EmpServiceImpl">
+        <property name="empDao" ref="jdbcDao"></property>
+    </bean>
+
 </beans>

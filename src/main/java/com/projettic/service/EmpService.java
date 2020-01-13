@@ -1,14 +1,10 @@
-package com.projettic.dao;
+package com.projettic.service;
 
 import com.projettic.entity.Emp;
 
-import javax.sql.DataSource;
 import java.util.List;
 
-public interface EmpDao {
-
-    public void setDataSource(DataSource ds);
-
+public interface EmpService {
     //find all emp
     List<Emp> findAll(String SQL);
 
