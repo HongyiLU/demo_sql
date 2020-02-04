@@ -12,6 +12,7 @@ import java.sql.SQLException;
 @Controller
 public class servlet {
     private static final long serialVersionUID = 1L;
+
     private EmpServiceImpl empServiceImpl = new EmpServiceImpl();
 
     public servlet() throws SQLException {

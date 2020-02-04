@@ -29,15 +29,5 @@
     <mvc:default-servlet-handler/>
 
 
-    <!-- 配置dao层 -->
-    <bean name="jdbcDao" class="com.projettic.dao.impl.EmpDaoImpl">
-        <property name="strUrl" value="jdbc:mysql://localhost:3306/testtic?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC"></property>
-        <property name="strUsername" value="root"></property>
-        <property name="strPW" value="123456"></property>
-    </bean>
-
-    <bean name="service" class="com.projettic.service.impl.EmpServiceImpl">
-        <property name="empDao" ref="jdbcDao"></property>
-    </bean>
 
 </beans>

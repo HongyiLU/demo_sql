@@ -8,15 +8,14 @@ import java.sql.SQLException;
 
 public class EmpServiceImpl implements com.projettic.service.EmpService {
 
-    @Autowired
     EmpDaoImpl empDao;
-
     String res;
     String hisRes;
 
     public EmpServiceImpl() throws SQLException {
         this.res = "";
         this.hisRes = "";
+        this.empDao = new EmpDaoImpl();
     }
 
     public void setEmpDao(EmpDaoImpl empDao) {

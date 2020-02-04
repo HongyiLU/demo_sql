@@ -4,18 +4,14 @@ import java.sql.*;
 
 public class EmpDaoImpl implements com.projettic.dao.EmpDao {
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
     String strUrl;
     String strUsername;
     String strPW;
-    Connection connection;
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testtic?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC", "root", "123456");;
 
-	public EmpDaoImpl() throws SQLException {
-		this.connection = DriverManager.getConnection(strUrl, strUsername, strPW);
-	}
+    public EmpDaoImpl() throws SQLException {
+    }
+
 
     public void setStrUrl(String strUrl) {
         this.strUrl = strUrl;
@@ -30,7 +26,7 @@ public class EmpDaoImpl implements com.projettic.dao.EmpDao {
     }
 
     public ResultSet getResult(String SqlQuery) throws SQLException {
-        Statement statement = connection.createStatement();
+        Statement statement = this.connection.createStatement();
         ResultSet result = statement.executeQuery(SqlQuery);
         return result;
     }
@@ -73,7 +69,7 @@ public class EmpDaoImpl implements com.projettic.dao.EmpDao {
 //            return res;
 //        }
 //    }
-
+//
 //    public void close() {
 ////        if (result != null) {
 ////            try {
