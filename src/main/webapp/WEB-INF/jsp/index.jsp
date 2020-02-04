@@ -5,6 +5,7 @@
 </head>
 <body>
     <a href="hellotest">this is a test of spring mvc controller</a><br>
-    <a href="sqlquery">this is a test of sql query</a>
+    <a href="sqlquery">this is a test of sql query</a><br>
+    <a href="jdbctest">this is a test of jdbc query</a>
 </body>
 </html>

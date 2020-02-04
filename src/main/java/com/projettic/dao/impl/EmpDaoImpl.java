@@ -1,33 +1,101 @@
 package com.projettic.dao.impl;
 
-import com.projettic.dao.EmpDao;
-import com.projettic.entity.Emp;
-import com.projettic.mapper.EmpMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.sql.*;
 
-import javax.sql.DataSource;
-import java.util.List;
+public class EmpDaoImpl implements com.projettic.dao.EmpDao {
 
-public class EmpDaoImpl implements EmpDao {
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplateObject;
-
-    @Override
-    public void setDataSource(DataSource ds) {
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
-    @Override
-    public List<Emp> findAll(String SQL) {
-        System.out.println("findAll called");
-        List<Emp> emps = jdbcTemplateObject.query(SQL,new EmpMapper());
-        return emps;
+    String strUrl;
+    String strUsername;
+    String strPW;
+    Connection connection;
+
+	public EmpDaoImpl() throws SQLException {
+		this.connection = DriverManager.getConnection(strUrl, strUsername, strPW);
+	}
+
+    public void setStrUrl(String strUrl) {
+        this.strUrl = strUrl;
     }
 
-    @Override
-    public void addEmp(Emp emp) {
-
+    public void setStrUsername(String strUsername) {
+        this.strUsername = strUsername;
     }
 
-    public void setJdbcTemplateObject(JdbcTemplate jdbcTemplateObject) {
+    public void setStrPW(String strPW) {
+        this.strPW = strPW;
     }
+
+    public ResultSet getResult(String SqlQuery) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(SqlQuery);
+        return result;
+    }
+
+//	public String getHisReq(String hisReq) {
+//        try {
+//
+//            Statement statement = connection.createStatement();
+//            ResultSet resultat = statement.executeQuery(hisReq);
+//            while (resultat.next()) {
+//                String empNom = resultat.getString("nom_emp");
+//                hisRes += empNom + " ";
+//            }
+//        } catch (SQLException e) {
+//            return e.toString();
+//
+//        }
+//        if (res.length() < 3) {
+//            return "error";
+//        } else {
+//            return hisRes;
+//        }
+//    }
+//
+//    public String getCorrection() {
+//        try {
+//
+//            Statement statement = connection.createStatement();
+//            ResultSet resultat = statement.executeQuery("SELECT nom_emp FROM emp;");
+//            while (resultat.next()) {
+//                String empNom = resultat.getString("nom_emp");
+//                res += empNom + " ";
+//            }
+//        } catch (SQLException e) {
+//
+//        }
+//        if (res.length() < 3) {
+//            return "error";
+//        } else {
+//            return res;
+//        }
+//    }
+
+//    public void close() {
+////        if (result != null) {
+////            try {
+////                /* On commence par fermer le ResultSet */
+////                result.close();
+////            } catch (SQLException ignore) {
+////            }
+////        }
+////        if (statement != null) {
+////            try {
+////                /* Puis on ferme le Statement */
+////                statement.close();
+////            } catch (SQLException ignore) {
+////            }
+////        }
+////        if (connection != null) {
+////            try {
+////                /* Fermeture de la connexion */
+////                connection.close();
+////            } catch (SQLException ignore) {
+////                /* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
+////            }
+////        }
+////    }
 }

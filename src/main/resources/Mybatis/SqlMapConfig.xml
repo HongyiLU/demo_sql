@@ -16,6 +16,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper class="com.projettic.dao.EmpDao"/>
+        <mapper class="com.projettic.dao.impl.EmpDaoImpl"/>
     </mappers>
 </configuration>

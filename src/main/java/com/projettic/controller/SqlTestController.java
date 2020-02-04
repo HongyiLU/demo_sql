@@ -1,13 +1,9 @@
 package com.projettic.controller;
 
-import com.projettic.dao.EmpDao;
-import com.projettic.entity.Emp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 @Controller
 public class SqlTestController {
