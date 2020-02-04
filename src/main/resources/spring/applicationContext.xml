@@ -28,6 +28,9 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
+<!--     Dao configuration -->
+    <bean id="EmpDao" class="com.projettic.dao.impl.EmpDaoImpl"></bean>
+    <bean id="EmpService" class="com.projettic.service.impl.EmpServiceImpl"></bean>
 
 
 </beans>

@@ -8,14 +8,15 @@ import java.sql.SQLException;
 
 public class EmpServiceImpl implements com.projettic.service.EmpService {
 
+    @Autowired
     EmpDaoImpl empDao;
     String res;
     String hisRes;
 
+    @Autowired
     public EmpServiceImpl() throws SQLException {
         this.res = "";
         this.hisRes = "";
-        this.empDao = new EmpDaoImpl();
     }
 
     public void setEmpDao(EmpDaoImpl empDao) {
@@ -30,8 +31,12 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
                 String empNom = result.getString("nom_emp");
                 hisRes += empNom + " ";
             }
-        } catch (SQLException e) {
-            return e.toString();
+            ResultSet resultSetExecutionPlan = empDao.getResult("explain "+hisReq);
+            resultSetExecutionPlan.next();
+            System.out.println("this is the execution plan");
+            System.out.println(resultSetExecutionPlan.getString("table"));
+        } catch (SQLException | ClassNotFoundException e) {
+            return e.getMessage();
         }
         if (hisRes.length() < 3) {
             return "error";
@@ -48,10 +53,11 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
                 String empNom = result.getString("nom_emp");
                 res += empNom + " ";
             }
-        } catch (SQLException e) {
-
+        } catch (SQLException | ClassNotFoundException e) {
+            return e.getMessage();
         }
         if (res.length() < 3) {
+            System.out.println("this is correction"+res);
             return "error";
         } else {
             return res;

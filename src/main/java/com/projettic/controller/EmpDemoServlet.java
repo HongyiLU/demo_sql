@@ -1,6 +1,9 @@
 package com.projettic.controller;
 
+import com.projettic.dao.impl.EmpDaoImpl;
+//import com.projettic.service.impl.EmpServiceImpl;
 import com.projettic.service.impl.EmpServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,15 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 @Controller
-public class servlet {
+public class EmpDemoServlet {
     private static final long serialVersionUID = 1L;
 
-    private EmpServiceImpl empServiceImpl = new EmpServiceImpl();
-
-    public servlet() throws SQLException {
+    @Autowired
+    private EmpServiceImpl empServiceImpl;
+    //private EmpDaoImpl empDao;
+    public EmpDemoServlet() throws SQLException {
     }
-
-
 
     @RequestMapping(path = "/jdbctest")
     protected void init(HttpServletRequest request,HttpServletResponse response) throws Exception{
