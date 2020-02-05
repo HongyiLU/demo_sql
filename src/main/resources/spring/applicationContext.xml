@@ -20,7 +20,7 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
+    <mvc:resources mapping="/angular/**" location="/WEB-INF/angular/" />
     <mvc:resources mapping="/css/" location="WEB-INF/static/css/**" />
     <mvc:resources mapping="/images/" location="WEB-INF/static/images/**" />
     <mvc:resources mapping="/js/" location="WEB-INF/static/js/**" />
