@@ -21,7 +21,7 @@ public class EmpDaoImpl implements com.projettic.dao.EmpDao {
     }
 
     public Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testtic?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC", "root", "123456");
         return conn;
 

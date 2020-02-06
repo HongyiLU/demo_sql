@@ -10,13 +10,9 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
 
     @Autowired
     EmpDaoImpl empDao;
-    String res;
-    String hisRes;
 
     @Autowired
     public EmpServiceImpl() throws SQLException {
-        this.res = "";
-        this.hisRes = "";
     }
 
     public void setEmpDao(EmpDaoImpl empDao) {
@@ -24,7 +20,8 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
     }
 
     @Override
-    public String getHisReq(String hisReq) {
+    public String getHisRes(String hisReq) {
+        String hisRes = "";
         try {
             ResultSet result = empDao.getResult(hisReq);
             while (result.next()) {
@@ -47,6 +44,7 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
 
     @Override
     public String getCorrection() {
+        String res = "";
         try {
             ResultSet result = empDao.getResult("SELECT nom_emp FROM emp;");
             while (result.next()) {
