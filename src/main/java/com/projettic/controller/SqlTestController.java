@@ -1,14 +1,12 @@
 package com.projettic.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.projettic.entity.sqlQuery;
+import com.projettic.entity.SqlQuery;
 import com.projettic.service.impl.EmpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -33,7 +31,7 @@ public class SqlTestController {
     public void testsql(@RequestBody String param, HttpServletRequest request) {
         System.out.println(request.getMethod());
         System.out.println(request.getHeader("Content-Type"));
-        sqlQuery sqlQuery = JSON.parseObject(param, sqlQuery.class);
+        SqlQuery sqlQuery = JSON.parseObject(param, SqlQuery.class);
         System.out.println(sqlQuery.toString());
         this.hisRes = empServiceImpl.getHisRes(sqlQuery.toString());
         System.out.println(hisRes);

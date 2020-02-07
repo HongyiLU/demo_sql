@@ -11,11 +11,6 @@ public class EmpDaoImpl implements com.projettic.dao.EmpDao {
     String strUsername;
     String strPW;
 
-//    String hisRes="";
-//    String res="";
-//    Statement statement=null;
-//    ResultSet resultat=null;
-
     @Autowired
     public EmpDaoImpl() {
     }
@@ -27,17 +22,6 @@ public class EmpDaoImpl implements com.projettic.dao.EmpDao {
 
     }
 
-    public void setStrUrl(String strUrl) {
-        this.strUrl = strUrl;
-    }
-
-    public void setStrUsername(String strUsername) {
-        this.strUsername = strUsername;
-    }
-
-    public void setStrPW(String strPW) {
-        this.strPW = strPW;
-    }
 
     public ResultSet getResult(String SqlQuery) throws SQLException, ClassNotFoundException {
         Statement statement = this.getConnection().createStatement();

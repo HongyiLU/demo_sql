@@ -1,6 +1,6 @@
 package com.projettic.entity;
 
-public class sqlQuery {
+public class SqlQuery {
     private String sqlquery;
 
     public void setSqlquery(String sqlquery) {
