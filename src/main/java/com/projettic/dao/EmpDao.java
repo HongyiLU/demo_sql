@@ -1,8 +1,18 @@
 package com.projettic.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.projettic.entity.Account;
+import com.projettic.entity.SqlQuery;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
 
 public interface EmpDao {
-    ResultSet getResult(String SqlQuery) throws SQLException, ClassNotFoundException;
+
+    @Select("select * from t_user")
+    public List<Account> findAllEmp();
+
+    @Select("${sqlQuery}")
+    List<LinkedHashMap<String, Object>> getHisResult(SqlQuery sqlQuery);
 }

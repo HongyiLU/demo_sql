@@ -1,18 +1,16 @@
 package com.projettic.entity;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class SqlQuery {
-    private String sqlquery;
+    private String sqlQuery;
 
 
-    public void setSqlquery(String sqlquery) {
-        this.sqlquery = sqlquery;
+    public void setSqlQuery(String sqlQuery) {
+        this.sqlQuery = sqlQuery;
     }
 
     @Override
     public String toString() {
-        return this.sqlquery;
+        return this.sqlQuery;
     }
 }
