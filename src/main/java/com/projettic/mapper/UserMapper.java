@@ -1,9 +1,9 @@
-package com.projettic.dao;
+package com.projettic.mapper;
 
 import com.projettic.entity.User;
 
-public interface UserDao {
-    public User findUserByName(String username);
+public interface UserMapper {
+    public User getUserByName(String userName);
     public User getUserByEmail(String emailAddress);
     public User getUserById(Integer userId);
 }

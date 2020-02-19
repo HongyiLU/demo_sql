@@ -1,60 +1,60 @@
 package com.projettic.entity;
 
 public class User {
-    private int user_id;
-    private String user_name;
-    private String user_password;
-    private String user_mail;
-    private String user_class;
+    private int iduser;
+    private String username;
+    private String userpassword;
+    private String useremail;
+    private String userclass;
 
-    public int getUser_id() {
-        return user_id;
+    public int getIduser() {
+        return iduser;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getUserpassword() {
+        return userpassword;
     }
 
-    public String getUser_mail() {
-        return user_mail;
+    public String getUseremail() {
+        return useremail;
     }
 
-    public String getUser_class() {
-        return user_class;
+    public String getUserclass() {
+        return userclass;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setIduser(int iduser) {
+        this.iduser = iduser;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
     }
 
-    public void setUser_mail(String user_mail) {
-        this.user_mail = user_mail;
+    public void setUseremail(String useremail) {
+        this.useremail = useremail;
     }
 
-    public void setUser_class(String user_class) {
-        this.user_class = user_class;
+    public void setUserclass(String userclass) {
+        this.userclass = userclass;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "user_id=" + user_id +
-                ", user_name='" + user_name + '\'' +
-                ", user_password='" + user_password + '\'' +
-                ", user_mail='" + user_mail + '\'' +
-                ", user_class='" + user_class + '\'' +
+                "iduser=" + iduser +
+                ", username='" + username + '\'' +
+                ", userpassword='" + userpassword + '\'' +
+                ", useremail='" + useremail + '\'' +
+                ", userclass='" + userclass + '\'' +
                 '}';
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.ResultSet;
 
 @Controller
 public class SqlTestController {
-    private String hisRes;
     @Autowired
     private EmpServiceImpl empServiceImpl;
 
@@ -28,21 +28,16 @@ public class SqlTestController {
 
     @CrossOrigin(value = "http://localhost:4200")
     @RequestMapping(path = "/testsql", method = RequestMethod.POST)
-    public void testsql(@RequestBody String param, HttpServletRequest request) {
+    @ResponseBody()
+    public String testsql1(@RequestBody String param, HttpServletRequest request) {
         System.out.println(request.getMethod());
         System.out.println(request.getHeader("Content-Type"));
         SqlQuery sqlQuery = JSON.parseObject(param, SqlQuery.class);
         System.out.println(sqlQuery.toString());
-        this.hisRes = empServiceImpl.getHisRes(sqlQuery.toString());
+        String hisRes = empServiceImpl.getHisRes(sqlQuery.toString());
         System.out.println(hisRes);
+        return hisRes;
     }
 
-    @CrossOrigin(value = "http://localhost:4200")
-    @RequestMapping(path = "/testsql", method = RequestMethod.GET)
-    @ResponseBody
-    public String testsql2(HttpServletRequest request) {
-        System.out.println(request.getMethod());
-        return this.hisRes;
-    }
 
 }
