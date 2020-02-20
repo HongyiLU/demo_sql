@@ -1,80 +1,92 @@
 package com.projettic.controller;
 
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.projettic.entity.Account;
 import com.projettic.entity.StatusCode;
 import com.projettic.service.AccountService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
+@RequestMapping(path = "/user")
 public class AccountController {
+
+    static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(path = "/testAccountService")
-    public String accountServiceTest() {
-        List<Account> userList = accountService.findAllUser();
-        for(Account user:userList){
-            System.out.println(user.toString());
-        }
-        return "success";
-    }
-
-    @RequestMapping(path = "user/testlogin")
+    @RequestMapping(path = "/testlogin")
     public String userLoginTestPage() {
         return "success";
     }
 
-    @RequestMapping(path = "user")
-    public String userLoginPage() {
-        return "login";
-    }
-
     //@CrossOrigin(value = "http://localhost:4200")
-    @RequestMapping(path = "/user/getloginfo", method = RequestMethod.POST)
+    @RequestMapping(path = "/getloginfo", method = RequestMethod.POST)
     @ResponseBody()
-    public String userLogin(HttpServletRequest req, HttpServletResponse res) {
-        Account account = new Account();
-        account.setUsername(req.getParameter("username"));
+    public String userLogin(Account account, HttpServletRequest req, HttpServletResponse res) {
         account.setEmail(req.getParameter("username"));
-        account.setPassword(req.getParameter("password"));
-        account.setGroupid(Integer.parseInt(req.getParameter("groupid")));
-        if(accountService.checkAccount(account)!=null){
+        if(accountService.checkAccount(account)!=null) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("ErrorCode", StatusCode.SUCCESS.getCode());
+            jsonObject.put("Data", accountService.checkAccount(account));
             req.getSession().setAttribute("EMAIL", account.getEmail());
-            String jsonString = JSON.toJSONString(accountService.checkAccount(account));
             res.addCookie(new Cookie("EMAIL", account.getEmail()));
-            System.out.println("Loggin successfully");
-            return jsonString;
+            logger.info("Login - " + account.getUsername());
+            return jsonObject.toString();
         } else {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("ErrorCode",StatusCode.NOT_LOGIN.getCode());
-            jsonObject.put("ErrorMessage",StatusCode.NOT_LOGIN.getMessage());
+            jsonObject.put("ErrorCode", StatusCode.UNAUTHORIZED.getCode());
+            jsonObject.put("ErrorMessage", StatusCode.UNAUTHORIZED.getMessage());
+            logger.info("Login not success - " + account.getUsername());
             return jsonObject.toString();
         }
     }
 
     //@CrossOrigin(value = "http://localhost:4200")
-    @RequestMapping(path = "/user/login")
+    @RequestMapping(path = "/login")
     public String userLogin() {
         return "login";
     }
 
-    @RequestMapping(path = "/user/errorlogin")
+    @RequestMapping(path = "/errorlogin")
     @ResponseBody
     public String notLoginWarning() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ErrorCode",StatusCode.NOT_LOGIN.getCode());
-        jsonObject.put("ErrorMessage",StatusCode.NOT_LOGIN.getMessage());
+        jsonObject.put("ErrorCode", StatusCode.NOT_LOGIN.getCode());
+        jsonObject.put("ErrorMessage", StatusCode.NOT_LOGIN.getMessage());
         return jsonObject.toString();
+    }
+
+    @RequestMapping(path = "/registerinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public String userRegister(Account account) {
+        try {
+            account.setGroupid(2);
+            accountService.saveAccount(account);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("ErrorCode", StatusCode.SUCCESS.getCode());
+            jsonObject.put("Data", accountService.checkAccount(account));
+            logger.info("User registered - " + jsonObject.toString());
+            return jsonObject.toString();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping(path = "/register")
+    public String userRegisterPage() {
+        return "register";
     }
 }

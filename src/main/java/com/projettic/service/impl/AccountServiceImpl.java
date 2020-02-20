@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service("accountService")
@@ -47,5 +46,6 @@ public class AccountServiceImpl implements AccountService {
         }
         return null;
     }
+
 
 }

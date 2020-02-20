@@ -3,6 +3,8 @@ package com.projettic.controller;
 import com.alibaba.fastjson.JSON;
 import com.projettic.entity.SqlQuery;
 import com.projettic.service.impl.EmpServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class EmpDemoServlet {
-
+    static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
     @Autowired
     private EmpServiceImpl empServiceImpl;
 
@@ -20,9 +22,8 @@ public class EmpDemoServlet {
     @ResponseBody()
     public String testsql1(@RequestBody String param) {
         SqlQuery sqlQuery = JSON.parseObject(param, SqlQuery.class);
-        System.out.println(sqlQuery.toString());
+        logger.info("input - " + sqlQuery.toString());
         String hisRes = empServiceImpl.getHisRes(sqlQuery);
-        System.out.println(hisRes);
         return hisRes;
     }
 }

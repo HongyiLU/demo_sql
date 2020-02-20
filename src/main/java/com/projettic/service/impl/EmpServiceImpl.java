@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
             for(LinkedHashMap linkedHashMap : empList){
                 JSONObject jsonObject = new JSONObject(linkedHashMap);
                 jsonArray.add(jsonObject);
-                System.out.println(jsonArray);
             }
             return jsonArray.toString();
         } catch (BadSqlGrammarException e ){

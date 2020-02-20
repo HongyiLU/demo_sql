@@ -18,10 +18,12 @@
     <input type="text" name="password"><br>
 
     <input type="radio" name="groupid" value="1">Login as Administrator<br>
-    <input type="radio" name="groupid" value="2" checked>Login as User<br>
+    <input type="radio" name="groupid" value="2" checked>Login as User<br><br>
 
 
-    <input type="submit" value="submit" /><br />
+    <input type="submit" value="Login" /> Don't have any account?
+    <a href="/user/register">Register</a>
+
 </form>
 
 </body>

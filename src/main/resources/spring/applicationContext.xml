@@ -3,43 +3,18 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.projettic"/>
-
-
-<!--    SpringMVC configuration-->
-    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-    <mvc:resources mapping="/css/" location="WEB-INF/static/css/**" />
-    <mvc:resources mapping="/images/" location="WEB-INF/static/images/**" />
-    <mvc:resources mapping="/js/" location="WEB-INF/static/js/**" />
-
-    <mvc:annotation-driven/>
-    <mvc:default-servlet-handler/>
-    
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/user/**"/>
-            <mvc:exclude-mapping path="/user/login"/>
-            <mvc:exclude-mapping path="/user/getloginfo"/>
-            <mvc:exclude-mapping path="/user/errorlogin"/>
-            <bean class="com.projettic.interceptor.UserSessionInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
 
 <!--     Mybatis configuration-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/testtic?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC"/>
         <property name="user" value="root"/>
         <property name="password" value="123456"/>

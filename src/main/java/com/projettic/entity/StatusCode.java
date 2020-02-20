@@ -6,22 +6,34 @@ package com.projettic.entity;
  *      是StatusCode这个类定义的。
  */
 public enum StatusCode {
-    /** 成功 */
+    /**
+     * 成功
+     */
     SUCCESS(200, "Login successfully"),
 
-    /** 没有登录 */
+    /**
+     * 没有登录
+     */
     NOT_LOGIN(400, "You have not logged in yet!"),
 
-    /** 发生异常 */
-    EXCEPTION(401, "发生异常"),
+    /**
+     * 发生异常
+     */
+    UNAUTHORIZED(401, "Wrong user name or password!"),
 
-    /** 系统错误 */
+    /**
+     * 系统错误
+     */
     SYS_ERROR(402, "系统错误"),
 
-    /** 参数错误 */
+    /**
+     * 参数错误
+     */
     PARAMS_ERROR(403, "参数错误 "),
 
-    /** 不支持或已经废弃 */
+    /**
+     * 不支持或已经废弃
+     */
     NOT_SUPPORTED(410, "不支持或已经废弃"),
 
     /** AuthCode错误 */

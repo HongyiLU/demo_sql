@@ -1,7 +1,7 @@
 package com.projettic.dao;
 
-import com.projettic.entity.SqlQuery;
 import com.projettic.entity.Account;
+import com.projettic.entity.SqlQuery;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -19,5 +19,5 @@ public interface AccountDao {
 
     @Insert("insert into t_user(username, password, email, groupid) " +
             "values(#{username},#{password},#{email},#{groupid})")
-    public void saveUserAccount(Account user) throws BadSqlGrammarException;
+    void saveUserAccount(Account user);
 }
