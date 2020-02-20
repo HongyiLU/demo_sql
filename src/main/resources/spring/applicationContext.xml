@@ -26,6 +26,16 @@
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/getloginfo"/>
+            <mvc:exclude-mapping path="/user/errorlogin"/>
+            <bean class="com.projettic.interceptor.UserSessionInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 <!--     Mybatis configuration-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">

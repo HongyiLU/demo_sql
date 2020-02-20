@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.projettic.dao.EmpDao;
 import com.projettic.entity.SqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -28,11 +29,9 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
                 System.out.println(jsonArray);
             }
             return jsonArray.toString();
-        } catch (Exception e){
-            System.out.println(e.getClass());
-            return e.getMessage();
+        } catch (BadSqlGrammarException e ){
+            return  e.getSQLException().getErrorCode() + "  "+ e.getSQLException().getMessage();
         }
-
     }
 
     @Override

@@ -57,4 +57,16 @@ public class Account {
                 ", groupid=" + groupid +
                 '}';
     }
+
+    public boolean equals(Account account) {
+        if (account.getUsername().equals(this.username) || account.getEmail().equals(this.email)) {
+            if(account.getPassword().equals(this.password)&&account.getGroupid()==this.groupid){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

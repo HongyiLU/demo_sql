@@ -4,37 +4,48 @@ import com.projettic.dao.AccountDao;
 import com.projettic.entity.Account;
 import com.projettic.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-@Service("userService")
+@Service("accountService")
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountDao accountDao;
 
+
     @Override
     public List<Account> findAllUser() {
         try{
             return accountDao.findAllUser();
-        } catch (SQLException e){
-            System.out.println(e.getErrorCode());
+        } catch (BadSqlGrammarException e){
+            System.out.println(e.getSQLException().getErrorCode());
             return null;
         }
-
     }
 
     @Override
     public void saveAccount(Account account) {
         try{
             accountDao.saveUserAccount(account);
-        } catch (SQLException e){
-            System.out.println(e.getErrorCode());
+        } catch (BadSqlGrammarException e){
+            System.out.println(e.getSQLException().getErrorCode());
         }
-
     }
 
+    @Override
+    public Account checkAccount(Account account) {
+        List<Account> accountList;
+        accountList = accountDao.findAllUser();
+        for(Account acc: accountList){
+            if(acc.equals(account)){
+                return acc;
+            }
+        }
+        return null;
+    }
 
 }
