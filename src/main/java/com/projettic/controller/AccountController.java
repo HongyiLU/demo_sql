@@ -1,6 +1,7 @@
 package com.projettic.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.projettic.entity.Account;
 import com.projettic.entity.StatusCode;
@@ -36,13 +37,14 @@ public class AccountController {
     @ResponseBody()
     public String userLogin(Account account, HttpServletRequest req, HttpServletResponse res) {
         account.setEmail(req.getParameter("username"));
-        if(accountService.checkAccount(account)!=null) {
+        Account reloginAccount = accountService.checkAccount(account);
+        if(reloginAccount !=null) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("ErrorCode", StatusCode.SUCCESS.getCode());
-            jsonObject.put("Data", accountService.checkAccount(account));
-            req.getSession().setAttribute("EMAIL", account.getEmail());
-            res.addCookie(new Cookie("EMAIL", account.getEmail()));
-            logger.info("Login - " + account.getUsername());
+            jsonObject.put("Data", reloginAccount);
+            req.getSession().setAttribute("userSession", reloginAccount);
+            res.addCookie(new Cookie("userCookie", JSON.toJSONString(reloginAccount)));
+            logger.info("Login - " + reloginAccount.getUsername());
             return jsonObject.toString();
         } else {
             JSONObject jsonObject = new JSONObject();
@@ -73,12 +75,20 @@ public class AccountController {
     public String userRegister(Account account) {
         try {
             account.setGroupid(2);
-            accountService.saveAccount(account);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("ErrorCode", StatusCode.SUCCESS.getCode());
-            jsonObject.put("Data", accountService.checkAccount(account));
-            logger.info("User registered - " + jsonObject.toString());
-            return jsonObject.toString();
+            if(accountService.isExist(account)) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("ErrorCode", StatusCode.USER_EXIST.getCode());
+                jsonObject.put("ErrorMessage", StatusCode.USER_EXIST.getMessage());
+                logger.info("Register not success - Username or email have already been used");
+                return jsonObject.toString();
+            } else {
+                accountService.saveAccount(account);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("ErrorCode", StatusCode.SUCCESS.getCode());
+                jsonObject.put("Data", accountService.checkAccount(account));
+                logger.info("User registered - " + jsonObject.toString());
+                return jsonObject.toString();
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             return e.getMessage();

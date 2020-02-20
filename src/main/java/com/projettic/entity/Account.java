@@ -60,13 +60,13 @@ public class Account {
 
     public boolean equals(Account account) {
         if (account.getUsername().equals(this.username) || account.getEmail().equals(this.email)) {
-            if(account.getPassword().equals(this.password)&&account.getGroupid()==this.groupid){
-                return true;
-            } else {
-                return false;
-            }
+            return account.getPassword().equals(this.password) && account.getGroupid() == this.groupid;
         } else {
             return false;
         }
+    }
+
+    public boolean exist(Account account) {
+        return account.getUsername().equals(this.username) || account.getEmail().equals(this.email);
     }
 }

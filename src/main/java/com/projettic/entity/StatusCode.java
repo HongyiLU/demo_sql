@@ -24,7 +24,7 @@ public enum StatusCode {
     /**
      * 系统错误
      */
-    SYS_ERROR(402, "系统错误"),
+    USER_EXIST(402, "Username or email have already been used"),
 
     /**
      * 参数错误

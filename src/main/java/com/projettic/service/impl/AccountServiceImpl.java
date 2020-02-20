@@ -12,6 +12,7 @@ import java.util.List;
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
 
+
     @Autowired
     private AccountDao accountDao;
 
@@ -37,14 +38,24 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account checkAccount(Account account) {
-        List<Account> accountList;
-        accountList = accountDao.findAllUser();
-        for(Account acc: accountList){
-            if(acc.equals(account)){
+        List<Account> accountList = accountDao.findAllUser();
+        for (Account acc : accountList) {
+            if (acc.equals(account)) {
                 return acc;
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean isExist(Account account) {
+        List<Account> accountList = accountDao.findAllUser();
+        for (Account acc : accountList) {
+            if (acc.exist(account)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
