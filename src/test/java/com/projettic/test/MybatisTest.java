@@ -20,59 +20,74 @@ import java.util.List;
 public class MybatisTest {
     @Test
     public void userLoginTest() throws IOException {
-        InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        SqlSession session = factory.openSession();
-        AccountDao dao = session.getMapper(AccountDao.class);
-        List<Account> userList = dao.findAllUser();
-        for(Account user:userList){
-            System.out.println(user.toString());
+        try{
+            InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
+            SqlSession session = factory.openSession();
+            AccountDao dao = session.getMapper(AccountDao.class);
+            List<Account> userList = dao.findAllUser();
+            for(Account user:userList){
+                System.out.println(user.toString());
+            }
+            session.close();
+            in.close();
+        } catch(Exception e){
+            System.out.println(e.getStackTrace());
         }
-        session.close();
-        in.close();
+
     }
 
     @Test
     public void userRegisterTest() throws IOException {
-        InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        SqlSession session = factory.openSession();
-        AccountDao dao = session.getMapper(AccountDao.class);
-        Account user1 = new Account();
-        user1.setGroupid(2);
-        user1.setUsername("Toto");
-        user1.setPassword("15265");
-        user1.setEmail("dlgjslidjgl");
+        try{
+            InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
+            SqlSession session = factory.openSession();
+            AccountDao dao = session.getMapper(AccountDao.class);
+            Account user1 = new Account();
+            user1.setGroupid(2);
+            user1.setUsername("Toto");
+            user1.setPassword("15265");
+            user1.setEmail("dlgjslidjgl");
 
-        dao.saveUserAccount(user1);
+            dao.saveUserAccount(user1);
 
-        session.commit();
+            session.commit();
 
-        List<Account> userList = dao.findAllUser();
-        for(Account user:userList){
-            System.out.println(user.toString());
+            List<Account> userList = dao.findAllUser();
+            for(Account user:userList){
+                System.out.println(user.toString());
+            }
+            session.close();
+            in.close();
+        } catch(Exception e){
+            System.out.println(e.getStackTrace());
         }
-        session.close();
-        in.close();
+
     }
 
     @Test
     public void testQuery() throws IOException {
-        SqlQuery sqlQuery = new SqlQuery();
-        sqlQuery.setSqlQuery("select * from emp");
-        InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        SqlSession session = factory.openSession();
-        AccountDao dao = session.getMapper(AccountDao.class);
-        List<LinkedHashMap<String, Object>> userList = dao.testQuery(sqlQuery);
-        JSONArray jsonArray = new JSONArray();
-        for(LinkedHashMap linkedHashMap : userList){
-            JSONObject jsonObject = new JSONObject(linkedHashMap);
-            jsonArray.add(jsonObject);
-            System.out.println(jsonArray);
+        try{
+            SqlQuery sqlQuery = new SqlQuery();
+            sqlQuery.setSqlQuery("select * from emp");
+            InputStream in = Resources.getResourceAsStream("Mybatis/SqlMapConfig.xml");
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
+            SqlSession session = factory.openSession();
+            AccountDao dao = session.getMapper(AccountDao.class);
+            List<LinkedHashMap<String, Object>> userList = dao.testQuery(sqlQuery);
+            JSONArray jsonArray = new JSONArray();
+            for(LinkedHashMap linkedHashMap : userList){
+                JSONObject jsonObject = new JSONObject(linkedHashMap);
+                jsonArray.add(jsonObject);
+                System.out.println(jsonArray);
+            }
+            session.close();
+            in.close();
+        } catch(Exception e){
+            System.out.println(e.getStackTrace());
         }
-        session.close();
-        in.close();
+
     }
 
 

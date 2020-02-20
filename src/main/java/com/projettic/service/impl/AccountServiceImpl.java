@@ -6,6 +6,7 @@ import com.projettic.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service("userService")
@@ -16,12 +17,23 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> findAllUser() {
-        return accountDao.findAllUser();
+        try{
+            return accountDao.findAllUser();
+        } catch (SQLException e){
+            System.out.println(e.getErrorCode());
+            return null;
+        }
+
     }
 
     @Override
     public void saveAccount(Account account) {
-        accountDao.saveUserAccount(account);
+        try{
+            accountDao.saveUserAccount(account);
+        } catch (SQLException e){
+            System.out.println(e.getErrorCode());
+        }
+
     }
 
 

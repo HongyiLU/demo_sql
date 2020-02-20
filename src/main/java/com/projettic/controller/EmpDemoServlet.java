@@ -44,7 +44,7 @@ public class EmpDemoServlet {
     }
 
     @RequestMapping(path = "/jdbcHisRes")
-    protected String hisRes() throws Exception {
+    protected String hisRes() {
         return "proto";
     }
 

@@ -7,6 +7,7 @@ import com.projettic.entity.SqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class EmpServiceImpl implements com.projettic.service.EmpService {
             }
             return jsonArray.toString();
         } catch (Exception e){
+            System.out.println(e.getClass());
             return e.getMessage();
         }
 
