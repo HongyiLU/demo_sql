@@ -17,4 +17,7 @@ public class TestController {
         return "sql_query";
     }
 
+    @RequestMapping(path="/testGit")
+    public String testGit(){ return "success";}
+
 }
