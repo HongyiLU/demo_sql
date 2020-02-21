@@ -12,5 +12,6 @@
 </head>
 <body>
     <h1>Test successfully</h1>
+    <a href="/user/logOut">Logout</a>
 </body>
 </html>

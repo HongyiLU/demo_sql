@@ -25,16 +25,17 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @CrossOrigin
     @RequestMapping(path = "/testLogin")
     public String userLoginTestPage() {
         return "success";
     }
 
-    @CrossOrigin(value = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(path = "/getLogInfo", method = RequestMethod.POST)
     @ResponseBody()
-    public String userLogin(@RequestBody String param, HttpServletRequest req, HttpServletResponse res) {
-        Account account = JSON.parseObject(param, Account.class);
+    public String userLogin(Account account/*@RequestBody String param*/, HttpServletRequest req, HttpServletResponse res) {
+        //Account account = JSON.parseObject(param, Account.class);
         account.setEmail(req.getParameter("username"));
         Account reloginAccount = accountService.checkAccount(account);
         if(reloginAccount !=null) {
@@ -42,7 +43,7 @@ public class AccountController {
             jsonObject.put("ErrorCode", StatusCode.SUCCESS.getCode());
             jsonObject.put("Data", reloginAccount);
             req.getSession().setAttribute("userSession", reloginAccount);
-            res.addCookie(new Cookie("userCookie", JSON.toJSONString(reloginAccount)));
+            //res.addCookie(new Cookie("userCookie", JSON.toJSONString(reloginAccount)));
             logger.info("Login - " + reloginAccount.getUsername());
             return jsonObject.toString();
         } else {
@@ -98,5 +99,15 @@ public class AccountController {
     @RequestMapping(path = "/register")
     public String userRegisterPage() {
         return "register";
+    }
+
+    //@CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(path = "/logOut")
+    public String userLogOut(HttpServletRequest req){
+        Account account = (Account) req.getSession().getAttribute("userSession");
+        logger.info("Log out - " + account.getUsername());
+        req.getSession().removeAttribute("userSession");
+        System.out.println("log out succesffuly!");
+        return "login";
     }
 }

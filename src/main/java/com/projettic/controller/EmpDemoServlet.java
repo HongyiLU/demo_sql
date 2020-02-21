@@ -18,7 +18,7 @@ public class EmpDemoServlet {
     @Autowired
     private EmpServiceImpl empServiceImpl;
 
-    @CrossOrigin(value = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(path = "/testSql", method = RequestMethod.POST)
     @ResponseBody()
     public String testsql1(@RequestBody String param) {

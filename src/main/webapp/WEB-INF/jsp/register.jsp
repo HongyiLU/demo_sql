@@ -11,7 +11,7 @@
     <title>AccountServiceTest</title>
 </head>
 <body>
-<form action="/user/registerinfo" method="post">
+<form action="/user/registerInfo" method="post">
     *Username:<br>
     <input type="text" name="username"><br>
     *Password:<br>

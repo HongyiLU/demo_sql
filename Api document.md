@@ -1,11 +1,13 @@
-目录
+#Catalog
 
-1\. User login
-2\. User register
-3\. SQL executor
+####[1\. User login](#1)
+####[2\. User logout](#2)
+####[3\. User login status test](#3)
+####[4\. User register](#4)
+####[5\. SQL executor](#5)
 ---
 
-**1\. User login**
+<h4 id="1">1. User login</h4>
 ###### Api function
 > Allow normal user and administrator to login and create session
 
@@ -25,6 +27,18 @@
 |password    |yes    |string   |Password|
 |email    |yes(or no if use username)    |string   |email address|
 |groupid    |yes    |int   |1.Administrator 2.Normal user(defaut)|
+
+###### Example request
+
+``` javascript
+{
+    "uid":1,
+    "username":"titi.toto"
+    "password":"123456", 
+    "email":"123456@gmail.com",
+    "groupid":2,
+}
+```
 
 ###### Example response of succesful request
 
@@ -48,8 +62,50 @@
 }
 ```
 ---
+<h4 id="2">2. User logout</h4>
 
-**2\. User register**
+###### Api function
+> Allow user to log out
+
+###### URL
+> ../user/logOut
+
+###### HTTP request methode
+> GET
+
+###### Example response of succesful request
+
+>this response will redirect user to the homepage or login page
+
+---
+<h4 id="3">3. User login status test</h4>
+###### Api function
+> Allow developper to test the status of login
+
+###### URL
+> ../user/testLogin
+
+###### HTTP request methode
+> GET
+
+###### Example response of succesful request
+
+``` javascript
+{
+    "success"
+}
+```
+
+###### Example response of failing request
+``` javascript
+{
+    "ErrorCode":400,
+    "ErrorMessage":"You have not logged in yet!"
+}
+```
+---
+<h4 id="4">4. User register</h4>
+
 ###### Api function
 > Allow normal users to create their accounts
 
@@ -104,7 +160,9 @@
 }
 ```
 ---
-**3\. SQL executor**
+
+<h4 id="5">5. SQL executor</h4>
+
 ###### Api function
 > Allow normal user to execute their SQL query
 

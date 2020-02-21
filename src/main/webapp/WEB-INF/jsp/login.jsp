@@ -11,7 +11,7 @@
     <title>AccountServiceTest</title>
 </head>
 <body>
-<form action="/user/getloginfo" method="post">
+<form action="/user/getLogInfo" method="post">
     Username:<br>
     <input type="text" name="username"><br>
     Password:<br>
