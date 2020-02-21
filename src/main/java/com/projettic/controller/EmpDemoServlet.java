@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@RequestMapping(path = "/sqlexecutor")
 public class EmpDemoServlet {
     static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
     @Autowired
