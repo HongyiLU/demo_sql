@@ -8,6 +8,7 @@
 ---
 
 <h4 id="1">1. User login</h4>
+
 ###### Api function
 > Allow normal user and administrator to login and create session
 
