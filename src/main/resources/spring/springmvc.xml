@@ -30,10 +30,10 @@
         <mvc:interceptor>
             <mvc:mapping path="/user/**"/>
             <mvc:exclude-mapping path="/user/login"/>
-            <mvc:exclude-mapping path="/user/getloginfo"/>
-            <mvc:exclude-mapping path="/user/errorlogin"/>
+            <mvc:exclude-mapping path="/user/getLogInfo"/>
+            <mvc:exclude-mapping path="/user/errorLogin"/>
             <mvc:exclude-mapping path="/user/register"/>
-            <mvc:exclude-mapping path="/user/registerinfo"/>
+            <mvc:exclude-mapping path="/user/registerInfo"/>
             <bean class="com.projettic.interceptor.UserSessionInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

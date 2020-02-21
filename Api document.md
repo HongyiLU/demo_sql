@@ -10,7 +10,7 @@
 > Allow normal user and administrator to login and create session
 
 ###### URL
-> ../user/getloginfo
+> ../user/getLogInfo
 
 ###### Support format
 > JSON
@@ -54,7 +54,7 @@
 > Allow normal users to create their accounts
 
 ###### URL
-> ../user/registerinfo
+> ../user/registerInfo
 
 ###### Support format
 > JSON
@@ -109,7 +109,7 @@
 > Allow normal user to execute their SQL query
 
 ###### URL
-> ../sqlexecutor/testsql
+> ../sqlExecutor/testSql
 
 ###### Support format
 > JSON

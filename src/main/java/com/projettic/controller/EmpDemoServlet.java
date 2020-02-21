@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping(path = "/sqlexecutor")
+@RequestMapping(path = "/sqlExecutor")
 public class EmpDemoServlet {
     static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
     @Autowired
     private EmpServiceImpl empServiceImpl;
 
     @CrossOrigin(value = "http://localhost:4200")
-    @RequestMapping(path = "/testsql", method = RequestMethod.POST)
+    @RequestMapping(path = "/testSql", method = RequestMethod.POST)
     @ResponseBody()
     public String testsql1(@RequestBody String param) {
         SqlQuery sqlQuery = JSON.parseObject(param, SqlQuery.class);

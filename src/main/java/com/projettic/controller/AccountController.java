@@ -10,9 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +25,16 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(path = "/testlogin")
+    @RequestMapping(path = "/testLogin")
     public String userLoginTestPage() {
         return "success";
     }
 
-    //@CrossOrigin(value = "http://localhost:4200")
-    @RequestMapping(path = "/getloginfo", method = RequestMethod.POST)
+    @CrossOrigin(value = "http://localhost:4200")
+    @RequestMapping(path = "/getLogInfo", method = RequestMethod.POST)
     @ResponseBody()
-    public String userLogin(Account account, HttpServletRequest req, HttpServletResponse res) {
+    public String userLogin(@RequestBody String param, HttpServletRequest req, HttpServletResponse res) {
+        Account account = JSON.parseObject(param, Account.class);
         account.setEmail(req.getParameter("username"));
         Account reloginAccount = accountService.checkAccount(account);
         if(reloginAccount !=null) {
@@ -55,13 +54,12 @@ public class AccountController {
         }
     }
 
-    //@CrossOrigin(value = "http://localhost:4200")
     @RequestMapping(path = "/login")
     public String userLogin() {
         return "login";
     }
 
-    @RequestMapping(path = "/errorlogin")
+    @RequestMapping(path = "/errorLogin")
     @ResponseBody
     public String notLoginWarning() {
         JSONObject jsonObject = new JSONObject();
@@ -70,10 +68,12 @@ public class AccountController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(path = "/registerinfo", method = RequestMethod.POST)
+    @CrossOrigin(value = "http://localhost:4200")
+    @RequestMapping(path = "/registerInfo", method = RequestMethod.POST)
     @ResponseBody
-    public String userRegister(Account account) {
+    public String userRegister(@RequestBody String param) {
         try {
+            Account account = JSON.parseObject(param,Account.class);
             account.setGroupid(2);
             if(accountService.isExist(account)) {
                 JSONObject jsonObject = new JSONObject();

@@ -20,7 +20,7 @@ public class UserSessionInterceptor implements HandlerInterceptor {
         }
         if (account == null) {
             System.out.println("用户尚未登录，将其重定向至登录页面");
-            res.sendRedirect("/user/errorlogin");
+            res.sendRedirect("/user/errorLogin");
             return false;
         } else {
             System.out.println("登录成功");
