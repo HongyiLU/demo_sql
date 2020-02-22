@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="OFF" monitorInterval="1800">
     <properties>
-        <property name="LOG_HOME">/WEB-INF/logs</property>
-        <property name="FILE_NAME">finance-pay</property>
+        <property name="LOG_HOME">D:\logs</property>
+        <property name="FILE_NAME">dailyRollLogs</property>
     </properties>
 
 
@@ -12,13 +12,13 @@
         </Console>
 
         <RollingFile name="running-log" fileName="${LOG_HOME}/${FILE_NAME}.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log.gz"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd-HH-mm}-%i.log"
                      immediateFlush="true">
             <PatternLayout
                     pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
             <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10 MB" />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+<!--                <SizeBasedTriggeringPolicy size="10 MB" />-->
             </Policies>
             <DefaultRolloverStrategy max="20" />
         </RollingFile>

@@ -25,11 +25,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @CrossOrigin
-    @RequestMapping(path = "/testLogin")
-    public String userLoginTestPage() {
-        return "success";
-    }
+
 
     //@CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(path = "/getLogInfo", method = RequestMethod.POST)
